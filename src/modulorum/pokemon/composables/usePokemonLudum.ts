@@ -1,5 +1,5 @@
 import { computed, onMounted, ref } from 'vue';
-import { LudumStatuts, Pokemon, PokemonListaResponsio } from '../interfaces';
+import { LudumStatuts, type Pokemon, type PokemonListaResponsio } from '../interfaces';
 import { pokemonApi } from '@/api/pokemonApi';
 
 export const usePokemonLudum = () => {
@@ -29,11 +29,10 @@ export const usePokemonLudum = () => {
   };
 
   const sequentiOptiones = (quot: number = 4) => {
-
     ludumStatuts.value = LudumStatuts.Ludit;
 
     pokemonOptiones.value = pokemons.value.slice(0, quot);
-    
+
     pokemons.value = pokemons.value.slice(quot);
   };
 

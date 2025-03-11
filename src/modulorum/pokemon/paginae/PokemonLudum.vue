@@ -18,7 +18,7 @@
 <script setup lang="ts">
 
 
-import PokemonImago from '../components/PokemonImago.vue';
+import PokemonImago from '../components/Pokemonimago.vue';
 import PokemonOptiones from '../components/PokemonOptiones.vue';
 import { usePokemonLudum } from '../composables/usePokemonLudum';
 
