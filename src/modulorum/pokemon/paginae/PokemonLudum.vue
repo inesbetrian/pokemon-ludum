@@ -1,5 +1,5 @@
 <template>
-    <section v-if="estPortat" class="flex flex-col justify-center items-center w-screen h-screen ">
+    <section v-if="estPortat || temerePokemon.id === null" class="flex flex-col justify-center items-center w-screen h-screen ">
 
         <h1 class="text-3xl">Espere, por favor</h1>
         <h3 class="animate-pulse">Cargando Pokémons</h3>
@@ -8,8 +8,13 @@
 
     <section v-else class="flex flex-col justify-center items-center w-screen h-screen ">
         <h1 class="m-5">¿Quién es este Pokémon?</h1>
-        <PokemonImago/> 
-        <PokemonOptiones />
+        <!-- <h3>{{ temerePokemon }}</h3> -->
+
+        <h3 class="capitalize my-3">{{ ludumStatuts }}</h3>
+
+
+        <PokemonImago :pokemon-id="temerePokemon.id" :revelare-pokemon="ludumStatuts !== LudumStatuts.Ludit" /> 
+        <PokemonOptiones :optiones ="optiones" @electus-optio="examineResponsio"/>
     </section>
 </template>
 
@@ -18,11 +23,23 @@
 <script setup lang="ts">
 
 
-import PokemonImago from '../components/Pokemonimago.vue';
+import PokemonImago from '../components/PokemonImago.vue';
 import PokemonOptiones from '../components/PokemonOptiones.vue';
 import { usePokemonLudum } from '../composables/usePokemonLudum';
+import { LudumStatuts } from '../interfaces';
 
-const { ludumStatuts, estPortat } = usePokemonLudum();
+const { 
+    ludumStatuts, 
+    estPortat, 
+    temerePokemon, 
+    pokemonOptiones: optiones,
+    examineResponsio,
+} = usePokemonLudum();
+
+// const cumElectusOptio = (valorem: number) => {
+//     console.log({valorem})
+// }
+
 
    
 </script>
