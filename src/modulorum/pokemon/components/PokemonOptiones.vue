@@ -4,10 +4,14 @@
 
     <button 
     
+    :disabled="nonEligere"
     v-for="{ nomen, id } in optiones" 
     :key="id" 
     @click="$emit('electusOptio', id)"
-    class="capitalize"
+    :class="['capitalize disabled:shadow-none disabled:bg-gray-100', {
+    recte: id === recteResponsio && nonEligere,
+    'non-recte': id !== recteResponsio && nonEligere,
+    }]"
     >
    
     {{ nomen  }}
@@ -20,11 +24,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { Pokemon } from '../interfaces';
+import { LudumStatuts, type Pokemon } from '../interfaces';
 
 
   interface Props{
     optiones: Pokemon[];
+    nonEligere: boolean;
+    recteResponsio: number
   }
 
   defineProps<Props>();
@@ -40,5 +46,14 @@ import type { Pokemon } from '../interfaces';
 
 button {
   @apply bg-white shadow-md rounded-lg p-3 my-2 cursor-pointer w-40 text-center hover:bg-gray-100 transition-all;
+}
+
+
+.recte {
+    @apply bg-blue-500 text-white
+}
+
+.non-recte {
+    @apply bg-red-300 opacity-70
 }
 </style>
